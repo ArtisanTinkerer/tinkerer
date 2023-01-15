@@ -44,4 +44,41 @@ class ExampleTest extends TestCase
             return false;
         }
     }
+
+    /** @test */
+    public function can_check_palindrome()
+    {
+        $word = 'racecar';
+
+        $returned = $this->isPalindrome($word);
+
+        $this->assertTrue($returned);
+    }
+
+    /** @test */
+    public function can_check_not_palindrome()
+    {
+        $word = 'potato';
+
+        $returned = $this->isPalindrome($word);
+
+        $this->assertFalse($returned);
+    }
+
+
+
+    private function isPalindrome($word)
+    {
+        $end = strlen($word);
+        $new = "";
+
+        for($i = $end-1; $i >= 0; $i--){
+            $new = $new . $word[$i];
+        }
+
+        return $new == $word;
+
+    }
+
+
 }
