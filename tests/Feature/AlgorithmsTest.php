@@ -5,7 +5,7 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class AlgorithmsTest extends TestCase
 {
     /** @test */
     public function can_reverse_int()
@@ -79,6 +79,39 @@ class ExampleTest extends TestCase
         return $new == $word;
 
     }
+
+    /** @test */
+    public function word_can_be_formed_from_chars()
+    {
+        $words = ["cat","bt","hat","tree","aaaaaaa"];
+        $allowedChars = "atach";
+        $passedWords = [];
+
+        foreach ($words as $word) {
+            $skipWord = false;
+            $wordArray = str_split($word);
+            foreach ($wordArray as $letter){
+
+                //is the letter in the allowed chars? -- and the same count
+                if (!str_contains($allowedChars, $letter ) || ( substr_count($word, $letter) > substr_count($allowedChars, $letter) ) ){
+                    $skipWord = true;
+                    break; //get out of here
+                }
+            }
+
+            if(!$skipWord){
+                $passedWords[] = $word;
+            }
+
+        }
+
+        dd($passedWords);
+    }
+
+//You are given an array of strings words and a string chars.
+//A string is good if it can be formed by characters from chars (each character can only be used once)
+
+//then sum the chars
 
 
 }
