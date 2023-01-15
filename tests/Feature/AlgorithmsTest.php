@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Classes\LinkedList;
+
 use Tests\TestCase;
 
 class AlgorithmsTest extends TestCase
@@ -163,6 +165,18 @@ class AlgorithmsTest extends TestCase
         return true;
     }
 
+
+    //linked list
+    /** @test */
+    public function can_insert_items()
+    {
+        $list = new LinkedList();
+        $list->insertAtBeginning('one');
+        $list->insertAtBeginning('two');
+        $list->insertAtBeginning('three');
+
+        $this->assertTrue(false);
+    }
 
 
 
