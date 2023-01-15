@@ -53,7 +53,7 @@ class LinkedList
         if ($this->head) { //we have some
             $currentNode = $this->head;
             //find the target node
-            while($currentNode->getData() != $target && $currentNode->getNext != null){
+            while($currentNode->getData() != $target && $currentNode->getNext() != null){
                 $currentNode = $currentNode->getNext();
             }
 
@@ -76,7 +76,7 @@ class LinkedList
             $currentNode = $this->head;
             $previousNode = null;
             //find the target node
-            while($currentNode->getData() != $target && $currentNode->getNext != null){
+            while($currentNode->getData() != $target && $currentNode->getNext() != null){
                 $previousNode = $currentNode;
                 $currentNode = $currentNode->getNext();
             }
@@ -86,7 +86,7 @@ class LinkedList
                 $newNode->setData($data);
 
                 if($previousNode) {
-                    $previousNode->setNext = $newNode;
+                    $previousNode->setNext($newNode);
                     $newNode->setNext($currentNode);
                 } else { //insert at the start
                     $previousNode = $newNode;
@@ -98,14 +98,14 @@ class LinkedList
         }
     }
 
-    public function deleteMode($target)
+    public function deleteNode($target)
     {
         if ($this->head) { //we have some
             //set the start point
             $currentNode = $this->head;
             $previousNode = null;
             //find the target node
-            while ($currentNode->getData() != $target && $currentNode->getNext != null) {
+            while ($currentNode->getData() != $target && $currentNode->getNext() != null) {
                 $previousNode = $currentNode;
                 $currentNode = $currentNode->getNext();
             }

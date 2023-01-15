@@ -175,6 +175,12 @@ class AlgorithmsTest extends TestCase
         $list->insertAtBeginning('two');
         $list->insertAtBeginning('three');
 
+        $list->insertAtEnd('end');
+        $list->insertAfterSpecified('afterTwo', 'two');
+        $list->insertBeforeSpecified('beforeTwo', 'two');
+
+        $list->deleteNode('one');
+
         $this->assertTrue(false);
     }
 
