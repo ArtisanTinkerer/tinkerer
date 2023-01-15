@@ -108,10 +108,62 @@ class AlgorithmsTest extends TestCase
         dd($passedWords);
     }
 
-//You are given an array of strings words and a string chars.
-//A string is good if it can be formed by characters from chars (each character can only be used once)
 
-//then sum the chars
+    /** @test */
+    public function can_check_is_anagram()
+    {
+        $word = 'potato';
+        $check = 'opotat';
+
+        $returned = $this->isAnagram($word, $check);
+
+        $this->assertTrue($returned);
+    }
+
+    /** @test */
+    public function can_check_is_not_anagram()
+    {
+        $word = 'apple';
+        $check = 'applz';
+
+        $returned = $this->isAnagram($word, $check);
+
+        $this->assertFalse($returned);
+    }
+
+    /** @test */
+    public function can_check_is_not_anagram_short()
+    {
+        $word = 'apple';
+        $check = 'app';
+
+        $returned = $this->isAnagram($word, $check);
+
+        $this->assertFalse($returned);
+    }
+
+
+
+
+
+    private function isAnagram($word, $check)
+    {
+
+        //and is string?
+        if(strlen($word) != strlen($check)) {
+            return false;
+        }
+
+        foreach(str_split($word) as $char){
+            if(!str_contains($check, $char)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 
 
 }
