@@ -7,6 +7,7 @@ use App\Classes\BinaryNode;
 use App\Classes\BinaryTree;
 use App\Classes\LinkedList;
 
+use App\Classes\ListToTreeNode;
 use Tests\TestCase;
 
 class AlgorithmsTest extends TestCase
@@ -201,6 +202,33 @@ class AlgorithmsTest extends TestCase
 
     }
 
+
+    /** @test */
+    public function can_convert_list_to_tree()
+    {
+        $list = [1,3,5,6,9];
+        $root =$this->listToTree($list);
+
+        dd($root);
+    }
+
+
+    public function listToTree($list)
+    {
+        if (empty($list)) {
+            return null;
+        }
+
+        $mid =  (int)(count($list) /2);
+
+        //start in the middle
+        $root = new ListToTreeNode($list[$mid]);
+
+        $root->left = $this->listToTree(array_slice($list, 0, $mid));
+        $root->right = $this->listToTree(array_slice($list, $mid + 1));
+
+        return $root;
+    }
 
 
 }
