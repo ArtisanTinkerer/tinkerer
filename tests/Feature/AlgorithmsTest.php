@@ -238,10 +238,41 @@ class AlgorithmsTest extends TestCase
         $max = $list->popMax();
         $min = $list->popMin();
 
+        $this->markTestSkipped('wip');
+
+    }
+
+    /** @test */
+    public function bubble_sort()
+    {
+        $arr = [4,6,7,4,5];
+        $size = sizeof($arr);
+
+        // Traverse through all array elements
+        for($outer = 0; $outer < $size; $outer++)
+        {
+            // Last i elements are already in place (none - first pass)
+            for ($inner = 0; $inner < ($size - $outer - 1); $inner++)
+            {
+                // traverse the array from 0 to n-i-1
+                // Swap if the element found is greater
+                // than the next element
+                $itemOn = $arr[$inner];
+                $itemNext = $arr[$inner+1];
+
+                if ($itemOn > $itemNext) { //compare and swap if true
+
+                    $arr[$inner] = $arr[$inner+1]; //on = next
+                    $arr[$inner+1] = $itemOn;
+                }
+            }
+        }
 
         $this->markTestSkipped('wip');
 
     }
+
+
 
 
 
