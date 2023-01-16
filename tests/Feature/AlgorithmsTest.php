@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Classes\BinaryNode;
+use App\Classes\BinaryTree;
 use App\Classes\LinkedList;
 
 use Tests\TestCase;
@@ -36,16 +38,7 @@ class AlgorithmsTest extends TestCase
         $this->assertTrue($returned);
     }
 
-    private function match_first_chars($word, $chars)
-    {
-        $first_chars = substr($word, 0, strlen($chars));
 
-        if ($first_chars == $chars) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /** @test */
     public function can_check_palindrome()
@@ -144,13 +137,8 @@ class AlgorithmsTest extends TestCase
         $this->assertFalse($returned);
     }
 
-
-
-
-
     private function isAnagram($word, $check)
     {
-
         //and is string?
         if(strlen($word) != strlen($check)) {
             return false;
@@ -163,6 +151,17 @@ class AlgorithmsTest extends TestCase
         }
 
         return true;
+    }
+
+    private function match_first_chars($word, $chars)
+    {
+        $first_chars = substr($word, 0, strlen($chars));
+
+        if ($first_chars == $chars) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -182,6 +181,24 @@ class AlgorithmsTest extends TestCase
         $list->deleteNode('one');
 
         $this->assertTrue(false);
+    }
+
+
+    /** @test */
+    public function binary_tree_traverse()
+    {
+        $tree = new BinaryTree(10);
+
+        $tree->insert(12);
+        $tree->insert(6);
+        $tree->insert(3);
+        $tree->insert(8);
+        $tree->insert(15);
+        $tree->insert(13);
+        $tree->insert(36);
+
+        $tree->traverse($tree->root);
+
     }
 
 
