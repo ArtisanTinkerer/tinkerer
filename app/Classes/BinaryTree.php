@@ -6,7 +6,7 @@ namespace App\Classes;
 
 class BinaryTree
 {
-    public $root = NULL;
+    public $root = null;
 
     public function __construct(int $data)
     {

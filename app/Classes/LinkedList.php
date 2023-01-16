@@ -47,7 +47,6 @@ class LinkedList
 
     }
 
-
     public function insertAfterSpecified($data, $target)
     {
         if ($this->head) { //we have some

@@ -8,6 +8,7 @@ use App\Classes\BinaryTree;
 use App\Classes\LinkedList;
 
 use App\Classes\ListToTreeNode;
+use App\Classes\MinMaxList;
 use Tests\TestCase;
 
 class AlgorithmsTest extends TestCase
@@ -73,7 +74,6 @@ class AlgorithmsTest extends TestCase
         }
 
         return $new == $word;
-
     }
 
     /** @test */
@@ -87,7 +87,6 @@ class AlgorithmsTest extends TestCase
             $skipWord = false;
             $wordArray = str_split($word);
             foreach ($wordArray as $letter){
-
                 //is the letter in the allowed chars? -- and the same count
                 if (!str_contains($allowedChars, $letter ) || ( substr_count($word, $letter) > substr_count($allowedChars, $letter) ) ){
                     $skipWord = true;
@@ -98,7 +97,6 @@ class AlgorithmsTest extends TestCase
             if(!$skipWord){
                 $passedWords[] = $word;
             }
-
         }
 
         dd($passedWords);
@@ -229,6 +227,22 @@ class AlgorithmsTest extends TestCase
 
         return $root;
     }
+
+    /** @test */
+    public function min_max_list_test()
+    {
+        $list = new MinMaxList();
+        $list->append(2);
+        $list->append(3);
+
+        $max = $list->popMax();
+        $min = $list->popMin();
+
+
+        $this->markTestSkipped('wip');
+
+    }
+
 
 
 }

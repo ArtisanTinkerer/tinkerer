@@ -16,7 +16,6 @@ class Node
         $this->data = null;
     }
 
-
     public function setData($data): void
     {
         $this->data = $data;
