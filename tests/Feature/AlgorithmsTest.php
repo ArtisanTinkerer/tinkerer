@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Classes\BinaryNode;
 use App\Classes\BinaryTree;
 use App\Classes\LinkedList;
 
@@ -17,16 +15,17 @@ class AlgorithmsTest extends TestCase
     public function can_reverse_int()
     {
         $num = 12345;
-
         $reversed = 0;
-        while ($num > 0) {
-            $remainder = $num % 10;
-            $reversed = ($reversed * 10) + $remainder;
 
-            $num = $num / 10;
+        while ($num > 0) {
+            //get the remaninder
+            $remainder = $num % 10;
+            //pad a zero and add it to reversed so far
+            $reversed = ($reversed * 10) + $remainder;
+            //strip it off the original number
+            $num = (int) ($num / 10);
         }
         echo $reversed;
-
     }
 
     /** @test */
@@ -36,11 +35,19 @@ class AlgorithmsTest extends TestCase
         $chars = 'Tree';
 
         $returned = $this->match_first_chars($word, $chars);
-
         $this->assertTrue($returned);
     }
 
+    private function match_first_chars($word, $chars)
+    {
+        $first_chars = substr($word, 0, strlen($chars));
 
+        if ($first_chars == $chars) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /** @test */
     public function can_check_palindrome()
@@ -61,8 +68,6 @@ class AlgorithmsTest extends TestCase
 
         $this->assertFalse($returned);
     }
-
-
 
     private function isPalindrome($word)
     {
@@ -114,6 +119,22 @@ class AlgorithmsTest extends TestCase
         $this->assertTrue($returned);
     }
 
+    private function isAnagram($word, $check)
+    {
+        if(strlen($word) != strlen($check)) {
+            return false;
+        }
+
+        foreach(str_split($word) as $char){
+            if(!str_contains($check, $char)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     /** @test */
     public function can_check_is_not_anagram()
     {
@@ -136,32 +157,8 @@ class AlgorithmsTest extends TestCase
         $this->assertFalse($returned);
     }
 
-    private function isAnagram($word, $check)
-    {
-        //and is string?
-        if(strlen($word) != strlen($check)) {
-            return false;
-        }
 
-        foreach(str_split($word) as $char){
-            if(!str_contains($check, $char)){
-                return false;
-            }
-        }
 
-        return true;
-    }
-
-    private function match_first_chars($word, $chars)
-    {
-        $first_chars = substr($word, 0, strlen($chars));
-
-        if ($first_chars == $chars) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     //linked list
@@ -245,32 +242,79 @@ class AlgorithmsTest extends TestCase
     /** @test */
     public function bubble_sort()
     {
-        $arr = [4,6,7,4,5];
-        $size = sizeof($arr);
+        $arr = [5,4,3,2,1];
+        $size = count($arr)-1;
 
-        // Traverse through all array elements
-        for($outer = 0; $outer < $size; $outer++)
-        {
-            // Last i elements are already in place (none - first pass)
-            for ($inner = 0; $inner < ($size - $outer - 1); $inner++)
-            {
-                // traverse the array from 0 to n-i-1
-                // Swap if the element found is greater
-                // than the next element
-                $itemOn = $arr[$inner];
-                $itemNext = $arr[$inner+1];
+        for ($outer=0; $outer<$size; $outer++) {
+            $swapped = false;
 
-                if ($itemOn > $itemNext) { //compare and swap if true
+            for ($inner=0; $inner<($size-$outer); $inner++) {
 
-                    $arr[$inner] = $arr[$inner+1]; //on = next
-                    $arr[$inner+1] = $itemOn;
+                $next = $inner+1;
+                if ($arr[$next] < $arr[$inner]) { // if the next one is less, flip
+                    $swapped = true;
+                    $tmp = $arr[$inner];
+                    $arr[$inner] = $arr[$next];
+                    $arr[$next] = $tmp;
+                }
+            }
+            if (!$swapped) break;
+         }
+
+        return $arr;
+
+    }
+
+    /** @test */
+    public function two_sum()
+    {
+        $numbers = [3, 5, 2, -4, 8, 11];
+        $answer = 7;
+
+        $results = [];
+
+        for($outer = 0; $outer < count($numbers); $outer++ ){
+            for($inner = $outer + 1; $inner < count($numbers); $inner++ ){
+
+                if($numbers[$outer] + $numbers[$inner] === $answer){
+                    $results[] = [$numbers[$outer], $numbers[$inner]];
                 }
             }
         }
 
-        $this->markTestSkipped('wip');
+        dd($results);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

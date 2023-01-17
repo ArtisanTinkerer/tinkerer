@@ -15,12 +15,11 @@ class BinaryTree
 
     public function isEmpty(): bool
     {
-        return $this->root === NULL;
+        return $this->root === null;
     }
 
     public function insert(int $data)
     {
-
         if($this->isEmpty()) {
             $node = new BinaryNode($data);
             $this->root = $node;
@@ -29,11 +28,11 @@ class BinaryTree
 
         $node = $this->root;
 
-        while($node) {
+        while($node) { //traversing to see where to place
             if($data > $node->data) {
                 if($node->right) {
                     $node = $node->right;
-                } else {
+                } else { //insert
                     $node->right = new BinaryNode($data);
                     $node = $node->right;
                     break;
@@ -42,7 +41,7 @@ class BinaryTree
             } elseif($data < $node->data) {
                 if($node->left) {
                     $node = $node->left;
-                } else {
+                } else { //insert
                     $node->left = new BinaryNode($data);
                     $node = $node->left;
                     break;
@@ -60,9 +59,13 @@ class BinaryTree
         if ($node) {
             if ($node->left)
                 $this->traverse($node->left);
+
             echo $node->data . "\n";
+
             if ($node->right)
                 $this->traverse($node->right);
+
+
         }
     }
 }
